@@ -86,6 +86,7 @@ export default class {
   }
 
   handleEditTicket(e, bill, bills) {
+    e.stopImmediatePropagation() // allowing to stop the listener on the others events
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
     if (this.counter % 2 === 0) {
@@ -143,6 +144,7 @@ export default class {
       $(`#status-bills-container${this.index}`)
         .html("")
       this.counter ++
+      
     }
 
     bills.forEach(bill => {

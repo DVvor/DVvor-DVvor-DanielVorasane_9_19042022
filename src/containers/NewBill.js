@@ -19,19 +19,17 @@ export default class NewBill {
   handleChangeFile = e => {
     e.preventDefault()
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-    const extension = file.name.split('.').pop();
+    const extention = ["jpg", "jpeg", "png"];
+    const fileExtension = file.name.split(".").pop();
+
+    if(extention.includes(fileExtension)) {
     
-    if (extension !== "jpeg" && extension !== "jpg" && extension !== "png") {
-      alert("l'extension du fichier est " + extension + ". Veuillez insérer un fichier au format .jpeg, .jpg ou .png");
-    }
-    if (extension === "jpeg" || extension === "jpg" || extension === "png") {
-    
-    const filePath = e.target.value.split(/\\/g)
-    const fileName = filePath[filePath.length-1]
-    const formData = new FormData()
-    const email = JSON.parse(localStorage.getItem("user")).email
-    formData.append('file', file)
-    formData.append('email', email)
+      const filePath = e.target.value.split(/\\/g)
+      const fileName = filePath[filePath.length-1]
+      const formData = new FormData()
+      const email = JSON.parse(localStorage.getItem("user")).email
+      formData.append('file', file)
+      formData.append('email', email)
 
       this.store
         .bills()
@@ -45,8 +43,17 @@ export default class NewBill {
           this.billId = key
           this.fileUrl = fileUrl
           this.fileName = fileName
-        }).catch(error => console.error(error))
-    }
+        })
+        .catch(error => console.error(error))
+      } else {
+        alert(
+          "Le fichier inséré n'est pas au bon format. Veuillez insérer un fichier au format 'jpg, jpeg ou png'"
+        );
+        const clearFile = this.document.querySelector(
+          `input[data-testid="file"]`
+        );
+        clearFile.value = null;
+      }
   }
 
   handleSubmit = e => {
