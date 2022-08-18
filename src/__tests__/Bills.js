@@ -26,7 +26,7 @@ describe("Given I am connected as an employee", () => {
       await waitFor(() => screen.getByTestId('icon-window'))
       const windowIcon = screen.getByTestId('icon-window')
       //to-do write expect expression
-
+      expect(windowIcon).toBeTruthy();
     })
     test("Then bills should be ordered from earliest to latest", () => {
       document.body.innerHTML = BillsUI({ data: bills })
@@ -34,6 +34,25 @@ describe("Given I am connected as an employee", () => {
       const antiChrono = (a, b) => ((a < b) ? 1 : -1)
       const datesSorted = [...dates].sort(antiChrono)
       expect(dates).toEqual(datesSorted)
+    })
+  })
+  describe("When I clicked on eye icon of a bill", () => {
+    test("Then a modal opens and displays the bill", () => {
+      // contient style display block
+      // contient img 1134 src != null
+      const modal = document.getElementById('modaleFile')
+      const style = window.getComputedStyle(modal)
+      expect(style).toEqual( "display:'block'")
+      const billContainer = document.querySelector(".bill-proof-container")
+      expect(billContainer).toBeTruthy()
+      const srcImg = document.querySelector('bill-proof-container').src.split("/")
+  
+
+    })
+  })
+  describe("When I clicked on button new bill", () => {
+    test("Then the page new bill is displayed ", () => {
+
     })
   })
 })
