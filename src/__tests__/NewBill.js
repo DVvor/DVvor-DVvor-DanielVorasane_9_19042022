@@ -15,4 +15,13 @@ describe("Given I am connected as an employee", () => {
       //to-do write assertion
     })
   })
+  // describe("When I am on NewBill Page", () => {
+    //test("Then ...", () => {
+      //to-do write assertion
+    //})
 })
+
+
+// télécharger une preuve de facture // handleChangeFile
+// valider ma note de frais // 
+// 
